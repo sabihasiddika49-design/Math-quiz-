@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<title>100 Question Sahi Galat Quiz</title>
+<style>
+  body { font-family: Arial; padding: 20px; }
+  .question { margin-bottom: 15px; }
+  .correct { color: green; font-weight: bold; }
+  .wrong { color: red; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<h2>100 Question – Sahi / Galat Quiz</h2>
+
+<div id="quiz"></div>
+
+<script>
+const questions = [];
+
+// AUTO 100 QUESTIONS
+for (let i = 1; i <= 100; i++) {
+  questions.push({
+    q: "Question number " + i + " yahan likho.",
+    a: i % 2 === 0   // even = sahi, odd = galat (aap badal sakte ho)
+  });
+}
+
+const quiz = document.getElementById("quiz");
+
+questions.forEach((item, index) => {
+  const div = document.createElement("div");
+  div.className = "question";
+  div.innerHTML = `
+    <p>${index + 1}. ${item.q}</p>
+    <input type="radio" name="q${index}" onclick="check(this, ${item.a})"> Sahi
+    <input type="radio" name="q${index}" onclick="check(this, ${!item.a})"> Galat
+    <span></span>
+  `;
+  quiz.appendChild(div);
+});
+
+function check(el, correct) {
+  const span = el.parentNode.querySelector("span");
+  if (correct) {
+    span.innerHTML = " ✅";
+    span.className = "correct";
+  } else {
+    span.innerHTML = " ❌";
+    span.className = "wrong";
+  }
+}
+</script>
+
+</body>
+</html>
